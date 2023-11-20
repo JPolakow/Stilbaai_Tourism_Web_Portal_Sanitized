@@ -8,7 +8,7 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
 {
    public class BusinessDBHandeler
    {
-      private ToolBoxSingleton _ToolBox = ToolBoxSingleton.Instance;
+      private readonly ToolBoxSingleton _ToolBox = ToolBoxSingleton.Instance;
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------

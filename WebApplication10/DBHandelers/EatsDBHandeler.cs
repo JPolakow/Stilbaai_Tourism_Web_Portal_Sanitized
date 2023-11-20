@@ -7,7 +7,7 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
 {
    public class EatsDBHandeler
    {
-      private ToolBoxSingleton _ToolBox = ToolBoxSingleton.Instance;
+      private readonly ToolBoxSingleton _ToolBox = ToolBoxSingleton.Instance;
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------
