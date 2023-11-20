@@ -66,7 +66,7 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
             using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
 
-               List<string> urls;
+               List<string> urls = new List<string>();
 
                string query = $"SELECT * FROM `stil_app_db`.`Eel_Image_Table` WHERE EEL_ID = @ID;";
 
