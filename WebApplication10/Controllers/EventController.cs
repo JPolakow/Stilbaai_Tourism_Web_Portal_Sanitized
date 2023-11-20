@@ -54,7 +54,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       [Authorize]
       public async Task<IActionResult> ViewEvents()
       {
-         // await db.GetEventCategory();
          await this.db.GetEvent();
 
          ViewBag.Events = _ToolBox.EventList;

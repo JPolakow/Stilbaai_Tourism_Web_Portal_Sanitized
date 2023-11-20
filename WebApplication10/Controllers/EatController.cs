@@ -54,7 +54,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       [Authorize]
       public async Task<IActionResult> ViewEats()
       {
-         // await db.GetEatCategory();
          await this.db.GetEat();
 
          ViewBag.Eats = _ToolBox.EatsList;
