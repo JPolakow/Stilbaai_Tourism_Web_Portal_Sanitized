@@ -20,7 +20,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //recieves the data from the view
+      //open view
       [ValidateAntiForgeryToken]
       [Authorize]
       public async Task<IActionResult> Notifications()
@@ -29,8 +29,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //
-      [ValidateAntiForgeryToken]
+      //recieves the data from the view
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SendNotification(string NOTIFICATION_CONTENT)
@@ -53,6 +52,8 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
          }
       }
 
+      //---------------------------------------------------------------------------------------
+      //send notification to firebase
       [Authorize]
       private bool SendNotificationToFirebase(string content)
       {

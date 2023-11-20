@@ -60,46 +60,6 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
 
       //---------------------------------------------------------------------------------------
       //
-      /*
-      public async Task<List<string>> GetEatImages(int EatId)
-      {
-         try
-         {
-            List<string> urls = new List<string>();
-
-            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
-            {
-               await connection.OpenAsync();
-
-               string query = $"SELECT * FROM `stil_app_db`.`Eat_Image_Table` WHERE EAT_ID = {EatId};";
-
-               using var command = new MySqlCommand(query, connection);
-               using var reader = await command.ExecuteReaderAsync();
-
-               while (await reader.ReadAsync())
-               {
-                  urls.Add(reader.GetString(1));
-               }
-
-               return urls;
-            }
-         }
-         catch (MySqlException e)
-         {
-            System.Diagnostics.Trace.WriteLine(e.ToString());
-            return null;
-         }
-         catch (Exception e)
-         {
-            System.Diagnostics.Trace.WriteLine(e.ToString());
-            return null;
-         }
-      }
-
-
-        */
-      //---------------------------------------------------------------------------------------
-      //
       public async Task<bool> UpdateContact(ContactModel contact)
       {
          try

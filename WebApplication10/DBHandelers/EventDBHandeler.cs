@@ -71,23 +71,26 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       {
          try
          {
-            List<string> urls = new List<string>();
-
-            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
-               await connection.OpenAsync();
 
-               string query = $"SELECT * FROM `stil_app_db`.`Event_Image_Table` WHERE EVENT_ID = {EventId};";
+               List<string> urls = new List<string>();
 
-               using var command = new MySqlCommand(query, connection);
-               using var reader = await command.ExecuteReaderAsync();
+               string query = $"SELECT * FROM `stil_app_db`.`Event_Image_Table` WHERE EVENT_ID = @ID;";
 
-               while (await reader.ReadAsync())
+               using (var command = new MySqlCommand(query, connection))
                {
-                  urls.Add(reader.GetString(1));
-               }
+                  command.Parameters.AddWithValue("@ID", EventId);
 
-               return urls;
+                  using var reader = await command.ExecuteReaderAsync();
+
+                  while (await reader.ReadAsync())
+                  {
+                     urls.Add(reader.GetString(1));
+                  }
+
+                  return urls;
+               }
             }
          }
          catch (MySqlException e)
