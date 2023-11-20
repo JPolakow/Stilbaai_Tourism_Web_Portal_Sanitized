@@ -99,7 +99,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       {
          var selectedStay = _ToolBox.StayList.FirstOrDefault(r => r.STAY_ID == id);
 
-         List<string> urls = new List<string>();
+         List<string> urls;
          urls = await this.db.GetStayImages(selectedStay.STAY_ID);
 
          if (urls != null)
@@ -196,7 +196,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
             }
 
             //check no images are associated in the db
-            List<string> urls = new List<string>();
+            List<string> urls;
             urls = await this.db.GetStayImages(STAY_ID);
 
             if (urls.Count != 0)

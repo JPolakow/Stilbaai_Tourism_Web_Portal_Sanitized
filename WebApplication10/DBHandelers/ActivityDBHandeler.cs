@@ -73,7 +73,7 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
             using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
 
-               List<string> urls = new List<string>();
+               List<string> urls;
 
                string query = $"SELECT * FROM `stil_app_db`.`Activity_Image_Table` WHERE ACTIVITY_ID = @ID;";
 

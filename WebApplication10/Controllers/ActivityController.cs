@@ -188,7 +188,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
             }
 
             //check no images are associated in the db
-            List<string> urls = new List<string>();
+            List<string> urls;
             urls = await this.db.GetActivityImages(ACTIVITY_ID);
 
             if (urls.Count != 0)

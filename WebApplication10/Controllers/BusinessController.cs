@@ -99,7 +99,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       {
          var selectedBusiness = _ToolBox.BusinessList.FirstOrDefault(r => r.BUSINESS_ID == id);
 
-         List<string> urls = new List<string>();
+         List<string> urls;
          urls = await this.db.GetBusinessImages(selectedBusiness.BUSINESS_ID);
 
          if (urls != null)
@@ -196,7 +196,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
             }
 
             //check no images are associated in the db
-            List<string> urls = new List<string>();
+            List<string> urls;
             urls = await this.db.GetBusinessImages(BUSINESS_ID);
 
             if (urls.Count != 0)

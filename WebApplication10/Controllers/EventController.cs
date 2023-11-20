@@ -76,7 +76,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       {
          var selectedEvent = _ToolBox.EventList.FirstOrDefault(r => r.EVENT_ID == id);
 
-         List<string> urls = new List<string>();
+         List<string> urls;
          urls = await this.db.GetEventImages(selectedEvent.EVENT_ID);
 
          if (urls != null)
@@ -171,7 +171,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
             }
 
             //check no images are associated in the db
-            List<string> urls = new List<string>();
+            List<string> urls;
             urls = await this.db.GetEventImages(EVENT_ID);
 
             if (urls.Count != 0)

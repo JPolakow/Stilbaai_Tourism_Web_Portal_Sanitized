@@ -55,7 +55,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       {
          var selectedEel = _ToolBox.EelList.FirstOrDefault(r => r.EEL_ID == 1);
 
-         List<string> urls = new List<string>();
+         List<string> urls;
          urls = await this.db.GetEelImages(selectedEel.EEL_ID);
 
          if (urls != null)
