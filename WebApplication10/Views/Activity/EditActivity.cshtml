@@ -1,5 +1,7 @@
 ﻿@model ActivityModel
-
+@{
+   ViewData["Title"] = "Edit Activity";
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +60,7 @@
                <td>Website</td>
                <td>
                   <input type="text" name="ACTIVITY_WEBSITE" value="@Model.ACTIVITY_WEBSITE"
-                         pattern="^.+\..+$" title="Please enter a valid website"/>
+                         pattern="^.+\..+$" title="Please enter a valid website" />
                </td>
             </tr>
             <tr>
