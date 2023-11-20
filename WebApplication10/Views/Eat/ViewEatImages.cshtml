@@ -1,0 +1,204 @@
+﻿@model EatModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Current Images</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <!-- Add icon library -->
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header>
+      <h1>View Images</h1>
+      <button onclick="redirectToDetails(@Model.EAT_ID)">
+         <i class="fa fa-arrow-left"></i>
+         Go Back
+      </button>
+   </header>
+   <hr>
+   <main>
+      <table>
+         @if (ViewBag.imageUrls != null)
+         {
+            @foreach (var imageUrl in ViewBag.imageUrls)
+            {
+               <tr>
+                  <td>
+                     <div class="image-container">
+                        <img src="@imageUrl" class="image-preview">
+                     </div>
+                  </td>
+                  <td>
+                     <button class="btnDelete" onclick="confirmDelete('@Model.EAT_ID', '@imageUrl')">
+                        <i class="fa fa-trash"></i>
+                        Delete Image
+                     </button>
+                  </td>
+               </tr>
+            }
+         }
+         else
+         {
+            <p>No images available.</p>
+         }
+      </table>
+   </main>
+   <br>
+   <header>
+      <h1>Add New Images</h1>
+   </header>
+   <hr>
+   <form onsubmit="uploadImages(@Model.EAT_ID); return false;" enctype="multipart/form-data">
+      <table>
+         <tr>
+            <td>Add Images</td>
+            <td>
+               <input type="file" id="imageFiles" name="imageFiles" accept="image/*" multiple onchange="previewImages(this)" />
+               <div id="imagePreview" class="thumbnail"></div>
+            </td>
+         </tr>
+      </table>
+      <br>
+      <div id="loadingSpinner"></div>
+      <div id="errorMessages" class="error-messages"></div>
+      <button type="submit" id="btnAdd">
+         <i class="fa fa-save"></i> Add
+      </button>
+      <input type="hidden" name="EAT_ID" value="@Model.EAT_ID" />
+   </form>
+</body>
+</html>
+
+<script>
+   $(document).ready(function () {
+      var errorMessage = "@TempData["ErrorMessage"]";
+      if (errorMessage) {
+         console.log("Error message found:", errorMessage);
+         // Display a popup with the error message
+         alert(errorMessage);
+      } else {
+         console.log("No error message found.");
+      }
+
+      $(".btnDelete").on("click", function () {
+         // Find the corresponding image URL for the clicked button
+         var imageUrl = $(this).data("imageurl");
+         confirmDelete(imageUrl);
+      });
+   });
+
+   function uploadImages(eatId) {
+      var formData = new FormData();
+      var input = document.getElementById("imageFiles");
+      var files = input.files;
+
+      for (var i = 0; i < files.length; i++) {
+         formData.append("imageFiles", files[i]);
+      }
+
+      formData.append("eatId", eatId);
+
+      $('#loadingSpinner').addClass('loading-spinner');
+
+      $.ajax({
+         type: "POST",
+         url: '@Url.Action("AddImages", "eat")',
+         data: formData,
+         contentType: false,
+         processData: false,
+         success: function (result) {
+            if (result.success) {
+               location.reload();
+            } else {
+               alert(result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+         },
+         complete: function () {
+            // Hide loading spinner
+            $('#loadingSpinner').removeClass('loading-spinner');
+         }
+      });
+   }
+
+   function confirmDelete(eatId, imageUrl) {
+      const firstConfirm = confirm("Are you sure you want to delete this image?");
+      if (firstConfirm) {
+         const secondConfirm = confirm("This action is irreversible. Are you absolutely sure?");
+         if (secondConfirm) {
+            // If the user confirmed both checks, proceed with the AJAX request
+            deleteImage(eatId, imageUrl);
+         }
+      }
+   }
+
+   function deleteImage(eatId, imageUrl) {
+      // Send an AJAX request to the controller
+      $.ajax({
+         type: "POST",
+         url: '@Url.Action("DeleteImage", "Eat")',
+         data: { eatId: eatId, imageUrl: imageUrl },
+         success: function (result) {
+            if (result.success) {
+               alert("Image deleted successfully!");
+               location.reload();
+            } else {
+               alert(result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+         },
+         complete: function () {
+            // Hide loading spinner
+            $('#loadingSpinner').removeClass('loading-spinner');
+         }
+      });
+   }
+
+   function previewImages(input) {
+      const imagePreview = document.getElementById("imagePreview");
+      imagePreview.innerHTML = ""; // Clear previous previews
+
+      for (const file of input.files) {
+         if (file.type.startsWith("image/")) {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.classList.add("thumbnail");
+            imagePreview.appendChild(img);
+         }
+      }
+   }
+
+   function redirectToDetails(EAT_ID) {
+      window.location.href = '/Eat/EditEats?id=' + EAT_ID;
+   }
+</script>
+
+<style>
+   .loading-spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+   }
+
+   @@-webkit-keyframes spin {
+      0% {
+         transform: rotate(0deg);
+      }
+
+      100% {
+         transform: rotate(360deg);
+      }
+   }
+
+</style>

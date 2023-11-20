@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>View Events</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <!-- Add icon library -->
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header>
+      <h1>View Events</h1>
+      <button class="btn-add-new" onclick="redirectToAdd()" style="font-size: 15px;">
+         <i class="fa fa-plus"></i>
+         Add New Place to Event
+      </button>
+   </header>
+   <hr>
+   <main>
+      <table>
+         <thead>
+            <tr>
+               <th width="60%">Event Name</th>
+               <th>Details</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach (var entry in ViewBag.Events)
+            {
+               <tr>
+                  <td>@entry.EVENT_NAME</td>
+                  <td>
+                     <button onclick="redirectToDetails(@entry.EVENT_ID)">Select</button>
+                  </td>
+               </tr>
+            }
+         </tbody>
+      </table>
+   </main>
+</body>
+</html>
+
+<script>
+   function redirectToDetails(EVENT_ID) {
+      window.location.href = '/Event/EditEvent?id=' + EVENT_ID;
+   }
+
+   function redirectToAdd() {
+      window.location.href = '/Event/AddNewEvent';
+   }
+</script>

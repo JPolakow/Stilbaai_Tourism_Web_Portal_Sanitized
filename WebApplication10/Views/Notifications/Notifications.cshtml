@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Send Notification</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <!-- Add icon library -->
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header>
+      <h1>Send Notification</h1>
+   </header>
+   <hr>
+   <main>
+      <form id="sendForm" enctype="multipart/form-data">
+         <h4>Notification Message</h4>
+         <textarea name="NOTIFICATION_CONTENT" required minlength="5" maxlength="100"></textarea>
+         <header>
+            <h5> </h5>
+         </header>
+         <div id="loadingSpinner"></div>
+         <button type="submit" id="btnAdd">
+            <i class="fa fa-save"></i> Send
+         </button>
+      </form>
+   </main>
+</body>
+</html>
+
+<script>
+   document.getElementById("sendForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents the default form submission
+      sendNotification();
+   });
+
+   function sendNotification() {
+      $('#btnAdd').prop('disabled', true);
+
+      var formData = new FormData();
+      var formData = $('#sendForm').serialize();
+
+      $('#loadingSpinner').addClass('loading-spinner');
+
+      // Perform AJAX request
+      $.ajax({
+         type: "POST",
+         url: '@Url.Action("SendNotification", "Notifications")',
+         data: formData,
+         dataType: "json",
+         success: function (result) {
+            if (result.success) {
+               alert("Notification send successfully!");
+               location.reload();
+            } else {
+               alert("Error: " + result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+            alert("Error: " + error);
+         },
+         complete: function () {
+            // Hide loading spinner
+            $('#loadingSpinner').removeClass('loading-spinner');
+
+            // Re-enable the button after completion
+            $('#btnAdd').prop('disabled', false);
+         }
+      });
+   }
+</script>
+
+<style>
+   .loading-spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+   }
+
+   @@-webkit-keyframes spin {
+      0% {
+         transform: rotate(0deg);
+      }
+
+      100% {
+         transform: rotate(360deg);
+      }
+   }
+</style>

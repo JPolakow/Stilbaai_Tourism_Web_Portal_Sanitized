@@ -1,0 +1,94 @@
+﻿@model EelModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Edit Eel</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <!-- Add icon library -->
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header>
+      <h1>Edit Eel</h1>
+   </header>
+   <hr>
+   <main>
+      <form id="updateForm" enctype="multipart/form-data">
+         <table>
+            <tr>
+               <td>Name</td>
+               <td><input type="text" name="EEL_NAME" value="@Model.EEL_NAME" required /></td>
+            </tr>
+            <tr>
+               <td>Telephone Number</td>
+               <td>
+                  <input type="text" name="EEL_CONTACT_NUM" value="@Model.EEL_CONTACT_NUM"
+                         pattern="^0\d{9}$" title="Please use the format:0123456789" />
+               </td>
+            </tr>
+            <tr>
+               <td>Mobile Number</td>
+               <td><input type="text" name="EEL_ADDRESS" value="@Model.EEL_ADDRESS" /></td>
+            </tr>
+            <tr>
+               <td>Description</td>
+               <td><textarea name="EEL_DESCRIPTION" required maxlength="5000">@Model.EEL_DESCRIPTION</textarea></td>
+            </tr>
+         </table>
+         <header>
+            <h5> </h5>
+         </header>
+         <input type="hidden" name="EEL_ID" value="@Model.EEL_ID" />
+         <button type="submit" id="btnAdd">
+            <i class="fa fa-save"></i> Save
+         </button>
+      </form>
+      <br>
+      <button onclick="redirectToImages(@Model.EEL_ID)">
+         <i class="fa fa-image"></i>
+         View Images
+      </button>
+   </main>
+</body>
+</html>
+
+<script>
+   document.getElementById("updateForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents the default form submission
+      updateEntry();
+   });
+
+   function updateEntry() {
+      var formData = new FormData();
+
+      var formData = $('#updateForm').serialize();
+
+      // Perform AJAX request
+      $.ajax({
+         type: "POST",
+         url: '@Url.Action("SaveEel", "eel")',
+         data: formData,
+         dataType: "json",
+         success: function (result) {
+            if (result.success) {
+               alert("Entry updated successfully!");
+               location.reload();
+            } else {
+               alert("Error: " + result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+            alert("Error: " + error);
+         }
+      });
+   }
+
+   function redirectToImages(EEL_ID) {
+      window.location.href = '/Eel/ViewEelImages?id=' + EEL_ID;
+   }
+</script>

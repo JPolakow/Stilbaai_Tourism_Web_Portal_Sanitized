@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Eats</title>
+    <link rel="stylesheet" href="~/css/DefaultStyle.css">
+    <!-- Add icon library -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .rounded-corners {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <img src="data:image/png;base64,@ViewBag.LogoImage" alt="stillbaai logo" width="200" height="200">
+        <h1 class="display-4">Welcome</h1>
+        <p>Welcome to the Stillbaai Tourism Admin Web Portal!</p>
+        <img src="data:image/png;base64,@ViewBag.welcomeImage" alt="stillbaai logo" width="1250" height="200" class="rounded-corners">
+    </div>
+    <hr>
+</body>
+</html>

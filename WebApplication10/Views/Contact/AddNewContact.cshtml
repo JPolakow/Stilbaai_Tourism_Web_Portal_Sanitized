@@ -1,0 +1,176 @@
+﻿@model ContactModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Add New Contact</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header>
+      <h1>Add New Contact</h1>
+      <form method="post" action="@Url.Action("ViewContacts")">
+         <button id="btnCancel" type="submit">
+            <i class="fa fa-ban"></i> Cancel
+         </button>
+      </form>
+   </header>
+   <hr>
+   <main>
+      <form onsubmit="addContact(); return false;" enctype="multipart/form-data">
+         <table>
+            <tr>
+               <td>Name</td>
+               <td><input type="text" name="CONTACT_NAME" required maxlength="255" /></td>
+            </tr>
+            <tr>
+               <td>Contact Number</td>
+               <td>
+                  <input type="text" name="CONTACT_NUM" value=""
+                         pattern="^0\d{9}$" title="Please use the format:0123456789" />
+               </td>
+            </tr>
+            <tr>
+               <td>Email</td>
+               <td><input type="email" name="CONTACT_EMAIL" value="" /></td>
+            </tr>
+            <tr>
+               <td>Address</td>
+               <td><input type="text" name="CONTACT_ADDRESS" maxlength="255" /></td>
+            </tr>
+            <tr>
+               <td>Contact Person</td>
+               <td><input type="text" name="CONTACT_PERSON" value="" /></td>
+            </tr>
+         </table>
+         <header>
+            <h5> </h5>
+         </header>
+         <div id="loadingSpinner"></div>
+         <div id="errorMessages" class="error-messages"></div>
+         <button type="submit" id="btnAdd">
+            <i class="fa fa-save"></i> Add
+         </button>
+      </form>
+   </main>
+</body>
+</html>
+
+<script>
+   $(document).ready(function () {
+      var errorMessage = "@TempData["ErrorMessage"]";
+      if (errorMessage) {
+         console.log("Error message found:", errorMessage);
+         // Display a popup with the error message
+         alert(errorMessage);
+      } else {
+         console.log("No error message found.");
+      }
+   });
+
+   function addContact() {
+      // Disable the button to prevent multiple submissions
+      $('#btnAdd').prop('disabled', true);
+
+      var formData = new FormData();
+
+      // Append ContactModel properties to the FormData dynamically
+      var formInputs = document.getElementsByTagName("input");
+      for (var i = 0; i < formInputs.length; i++) {
+         var inputName = formInputs[i].name;
+         var inputValue = formInputs[i].value;
+         formData.append("newContact." + inputName, inputValue);
+      }
+
+      var formInputs = document.getElementsByTagName("textarea");
+      for (var i = 0; i < formInputs.length; i++) {
+         var inputName = formInputs[i].name;
+         var inputValue = formInputs[i].value;
+         formData.append("newContact." + inputName, inputValue);
+      }
+
+      $('#loadingSpinner').addClass('loading-spinner');
+
+      $.ajax({
+         type: "POST",
+         url: '@Url.Action("AddContact", "contact")',
+         data: formData,
+         contentType: false,
+         processData: false,
+         success: function (result) {
+            if (result.success) {
+               alert("Entry added successfully!");
+               window.location.href = '/contact/ViewContacts';
+            } else {
+               alert(result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+         },
+         complete: function () {
+            // Hide loading spinner
+            $('#loadingSpinner').removeClass('loading-spinner');
+            // Re-enable the button after completion
+            $('#btnAdd').prop('disabled', false);
+         }
+      });
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   function previewImages(input) {
+      const imagePreview = document.getElementById("imagePreview");
+      imagePreview.innerHTML = "";
+
+      for (const file of input.files) {
+         if (file.type.startsWith("image/")) {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.classList.add("thumbnail");
+            imagePreview.appendChild(img);
+         }
+      }
+   }
+
+</script>
+
+<style>
+   .loading-spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+   }
+
+   @@-webkit-keyframes spin {
+      0% {
+         transform: rotate(0deg);
+      }
+
+      100% {
+         transform: rotate(360deg);
+      }
+   }
+</style>

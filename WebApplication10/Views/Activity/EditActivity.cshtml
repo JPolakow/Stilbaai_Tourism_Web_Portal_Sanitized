@@ -1,0 +1,183 @@
+﻿@model ActivityModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Edit @Model.ACTIVITY_NAME</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <!-- Add icon library -->
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header style="display: flex; justify-content: space-between; align-items: center;">
+      <h1 style="margin-right: auto;">Edit @Model.ACTIVITY_NAME</h1>
+      <form method="post" action="@Url.Action("ViewActivities")" style="display: inline-block; margin-right: 10px;">
+         <button ID="btnCancel" type="submit">
+            <i class="fa fa-arrow-left"></i>
+            Go Back
+         </button>
+      </form>
+      <form method="post" action="@Url.Action("DeleteActivity", "Activity")" onsubmit="return confirmFirstDelete();" style="display: inline-block;">
+         <input type="hidden" name="ACTIVITY_ID" value="@Model.ACTIVITY_ID" />
+         <button ID="btnDelete" type="submit">
+            <i class="fa fa-trash"></i>
+            Delete
+         </button>
+      </form>
+   </header>
+   <hr>
+   <main>
+      <form id="updateForm" enctype="multipart/form-data">
+         <table>
+            <tr>
+               <td>Name</td>
+               <td><input type="text" name="ACTIVITY_NAME" value="@Model.ACTIVITY_NAME" required /></td>
+            </tr>
+            <tr>
+               <td>Telephone Number</td>
+               <td>
+                  <input type="text" name="ACTIVITY_TEL_NUM" value="@Model.ACTIVITY_TEL_NUM"
+                         pattern="^0\d{9}$" title="Please use the format:123 123 1234" />
+               </td>
+            </tr>
+            <tr>
+               <td>Mobile Number</td>
+               <td>
+                  <input type="text" name="ACTIVITY_MOBILE_NUM" value="@Model.ACTIVITY_MOBILE_NUM"
+                         pattern="^0\d{9}$" title="Please use the format:123 123 1234" />
+               </td>
+            </tr>
+            <tr>
+               <td>Email</td>
+               <td><input type="email" name="ACTIVITY_EMAIL" value="@Model.ACTIVITY_EMAIL" /></td>
+            </tr>
+            <tr>
+               <td>Website</td>
+               <td>
+                  <input type="text" name="ACTIVITY_WEBSITE" value="@Model.ACTIVITY_WEBSITE"
+                         pattern="^.+\..+$" title="Please enter a valid website"/>
+               </td>
+            </tr>
+            <tr>
+               <td>Address</td>
+               <td><input type="text" name="ACTIVITY_ADDRESS" value="@Model.ACTIVITY_ADDRESS" /></td>
+            </tr>
+            <tr>
+               <td>Contact Person</td>
+               <td><input type="text" name="ACTIVITY_CONTACT_PERSON" value="@Model.ACTIVITY_CONTACT_PERSON" /></td>
+            </tr>
+            <tr>
+               <td>Description</td>
+               <td><textarea name="ACTIVITY_DESCRIPTION" required maxlength="5000">@Model.ACTIVITY_DESCRIPTION</textarea></td>
+            </tr>
+            <tr>
+               <td>Category Name</td>
+               <td>
+                  <select id="dropdownList" name="ACTIVITY_CATEGORY_NAME" required>
+                     @foreach (var item in ViewBag.Categories)
+                     {
+                        if (ViewBag.SelectedCategory != null && item == ViewBag.SelectedCategory)
+                        {
+                           <option value="@item" selected="selected">@item</option>
+                        }
+                        else
+                        {
+                           <option value="@item">@item</option>
+                        }
+                     }
+                  </select>
+               </td>
+            </tr>
+         </table>
+         <header>
+            <h5> </h5>
+         </header>
+         <input type="hidden" name="ACTIVITY_ID" value="@Model.ACTIVITY_ID" />
+         <button type="submit" id="btnAdd">
+            <i class="fa fa-save"></i> Save
+         </button>
+      </form>
+      <br>
+      <button onclick="redirectToImages(@Model.ACTIVITY_ID)">
+         <i class="fa fa-image"></i>
+         View Images
+      </button>
+   </main>
+</body>
+</html>
+
+<script>
+   document.getElementById("updateForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents the default form submission
+      updateEntry();
+   });
+
+   function updateEntry() {
+      var formData = new FormData();
+
+      var formData = $('#updateForm').serialize();
+
+      // Perform AJAX request
+      $.ajax({
+         type: "POST",
+         url: '@Url.Action("SaveActivity", "Activity")',
+         data: formData,
+         dataType: "json",
+         success: function (result) {
+            if (result.success) {
+               alert("Entry updated successfully!");
+               window.location.href = '/Activity/ViewActivities';
+            } else {
+               alert("Error: " + result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+            alert("Error: " + error);
+         }
+      });
+   }
+
+   function confirmFirstDelete() {
+      const firstConfirm = confirm("Are you sure you want to delete this entry?");
+      if (firstConfirm) {
+         const secondConfirm = confirm("This action is irreversible. Are you absolutely sure?");
+         if (secondConfirm) {
+            // Perform AJAX delete request
+            deleteEntry();
+         }
+      }
+      return false; // Prevent the form submission
+   }
+
+   function deleteEntry() {
+      var ActivityID = '@Model.ACTIVITY_ID';
+
+      // Perform AJAX request
+      $.ajax({
+         type: "POST",
+         url: '/Activity/DeleteActivity',
+         data: { ACTIVITY_ID: ActivityID },
+         dataType: "json",
+         success: function (result) {
+            if (result.success) {
+               alert("Entry deleted successfully!");
+               window.location.href = '/Activity/ViewActivities';
+            } else {
+               alert("Error: " + result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+            alert("Error: " + error);
+         }
+      });
+   }
+
+   function redirectToImages(ACTIVITY_ID) {
+      window.location.href = '/Activity/ViewActivityImages?id=' + ACTIVITY_ID;
+   }
+</script>

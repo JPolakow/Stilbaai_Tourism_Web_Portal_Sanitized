@@ -1,0 +1,139 @@
+﻿@model ContactModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Edit @Model.CONTACT_NAME</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <!-- Add icon library -->
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header style="display: flex; justify-content: space-between; align-items: center;">
+      <h1 style="margin-right: auto;">Edit @Model.CONTACT_NAME</h1>
+      <form method="post" action="@Url.Action("ViewContacts")" style="display: inline-block; margin-right: 10px;">
+         <button ID="btnCancel" type="submit">
+            <i class="fa fa-arrow-left"></i>
+            Go Back
+         </button>
+      </form>
+      <form method="post" action="@Url.Action("DeleteContact", "Contact")" onsubmit="return confirmFirstDelete();" style="display: inline-block;">
+         <input type="hidden" name="CONTACT_ID" value="@Model.CONTACT_ID" />
+         <button ID="btnDelete" type="submit">
+            <i class="fa fa-trash"></i>
+            Delete
+         </button>
+      </form>
+   </header>
+   <hr>
+   <main>
+      <form id="updateForm" enctype="multipart/form-data">
+         <table>
+            <tr>
+               <td>Name</td>
+               <td><input type="text" name="CONTACT_NAME" value="@Model.CONTACT_NAME" required /></td>
+            </tr>
+            <tr>
+               <td>Contact Number</td>
+               <td>
+                  <input type="text" name="CONTACT_NUM" value="@Model.CONTACT_NUM"
+                         pattern="^0\d{9}$" title="Please use the format:0123456789" />
+               </td>
+            </tr>
+            <tr>
+               <td>Email</td>
+               <td><input type="email" name="CONTACT_EMAIL" value="@Model.CONTACT_EMAIL" /></td>
+            </tr>
+            <tr>
+               <td>Address</td>
+               <td><input type="text" name="CONTACT_ADDRESS" value="@Model.CONTACT_ADDRESS" /></td>
+            </tr>
+            <tr>
+               <td>Contact Person</td>
+               <td><input type="text" name="CONTACT_PERSON" value="@Model.CONTACT_PERSON" /></td>
+            </tr>
+         </table>
+         <header>
+            <h5> </h5>
+         </header>
+         <input type="hidden" name="CONTACT_ID" value="@Model.CONTACT_ID" />
+         <button type="submit" id="btnAdd">
+            <i class="fa fa-save"></i> Save
+         </button>
+      </form>
+      <br>
+   </main>
+</body>
+</html>
+
+<script>
+   document.getElementById("updateForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents the default form submission
+      updateEntry();
+   });
+
+   function updateEntry() {
+      var formData = new FormData();
+
+      var formData = $('#updateForm').serialize();
+
+      // Perform AJAX request
+      $.ajax({
+         type: "POST",
+         url: '@Url.Action("SaveContact", "contact")',
+         data: formData,
+         dataType: "json",
+         success: function (result) {
+            if (result.success) {
+               alert("Entry updated successfully!");
+               window.location.href = '/contact/ViewContacts';
+            } else {
+               alert("Error: " + result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+            alert("Error: " + error);
+         }
+      });
+   }
+
+   function confirmFirstDelete() {
+      const firstConfirm = confirm("Are you sure you want to delete this entry?");
+      if (firstConfirm) {
+         const secondConfirm = confirm("This action is irreversible. Are you absolutely sure?");
+         if (secondConfirm) {
+            // Perform AJAX delete request
+            deleteEntry();
+         }
+      }
+      return false; // Prevent the form submission
+   }
+
+   function deleteEntry() {
+      var contactID = '@Model.CONTACT_ID';
+
+      // Perform AJAX request
+      $.ajax({
+         type: "POST",
+         url: '/contact/DeleteContact',
+         data: { CONTACT_ID: contactID },
+         dataType: "json",
+         success: function (result) {
+            if (result.success) {
+               alert("Entry deleted successfully!");
+               window.location.href = '/contact/ViewContacts';
+            } else {
+               alert("Error: " + result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+            alert("Error: " + error);
+         }
+      });
+   }
+</script>

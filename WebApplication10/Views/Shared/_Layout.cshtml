@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>@ViewData["Title"] - WebApplication10</title>
+
+   <!-- custom css file for the nav bar -->
+   <link rel="stylesheet" href="~/css/NavStyle.css" />
+
+   <!-- this enviomnent part cuaes there to be two different librarys used, one for localhost, one for azure, basicly -->
+   <environment include="Development">
+      <!-- local/development -->
+      <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="~/css/site.css" />
+   </environment>
+   <environment exclude="Development">
+      <!-- azure/deployment -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.css" asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.css"
+            integrity="..." crossorigin="anonymous">
+      <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+   </environment>
+
+   <link rel="icon" href="~/favicon.ico" type="image/x-icon" />
+   <link rel="icon" href="~/favicon.ico" type="image/x-icon" sizes="16x16">
+   <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+
+</head>
+<body>
+
+   <!-- nar bar -->
+   <nav class="navbar navbar-expand-sm navbar-light bg-light-grey border-bottom box-shadow mb-3">
+      <div class="container-fluid">
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                 aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+
+         <!-- admin items nav bar items -->
+         <div class="navbar-collapse">
+            <ul class="nav navbar-nav">
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Eat" asp-action="ViewEats">Eat</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Stay" asp-action="ViewStays">Stay</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Business" asp-action="ViewBusiness">Business</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Activity" asp-action="ViewActivities">Activities</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Event" asp-action="ViewEvents">Events</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Eel" asp-action="EditEel">Eels</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Contact" asp-action="ViewContacts">Contacts</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" asp-area="" asp-controller="Notifications" asp-action="Notifications">Notifications</a>
+               </li>
+            </ul>
+
+         </div>
+
+         <!-- account nav bar items -->
+         <ul class="nav navbar-nav ml-auto">
+            @if (User.Identity.IsAuthenticated)
+            {
+               <li class="nav-item">
+                  <a class="nav-link text-dark">@User.Identity.Name</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link text-dark" id="qsLogoutBtn" asp-controller="Account" asp-area="" asp-action="Logout">Logout</a>
+               </li>
+            }
+            else
+            {
+               <li class="nav-item">
+                  <a class="nav-link text-dark" id="qsLoginBtn" asp-controller="Account" asp-area="" asp-action="Login">Login</a>
+               </li>
+            }
+         </ul>
+
+      </div>
+   </nav>
+
+
+   <partial name="_CookieConsentPartial" />
+
+   <div class="container">
+      <main role="main" class="pb-3">
+         @RenderBody()
+      </main>
+   </div>
+
+   <footer class="border-top footer text-muted" style="text-align: center;">
+      &copy; 2023 - Stilbaai Tourism Web Portal
+   </footer>
+
+
+   <environment include="Development">
+      <script src="~/lib/jquery/dist/jquery.js"></script>
+      <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="~/js/site.js" asp-append-version="true"></script>
+   </environment>
+   <environment exclude="Development">
+      <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+              asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+              asp-fallback-test="window.jQuery"
+              crossorigin="anonymous"
+              integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+      </script>
+      <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+              asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+              asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+              crossorigin="anonymous"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+      </script>
+      <script src="~/js/site.min.js" asp-append-version="true"></script>
+   </environment>
+
+   @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

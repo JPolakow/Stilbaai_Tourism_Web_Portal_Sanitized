@@ -1,0 +1,209 @@
+﻿@model ActivityModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Add New Activity</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header>
+      <h1>Add New Activity</h1>
+      <form method="post" action="@Url.Action("ViewActivities")">
+         <button id="btnCancel" type="submit">
+            <i class="fa fa-ban"></i> Cancel
+         </button>
+      </form>
+   </header>
+   <hr>
+   <main>
+      <form onsubmit="addActivity(); return false;" enctype="multipart/form-data">
+         <table>
+            <tr>
+               <td>Name</td>
+               <td><input type="text" name="ACTIVITY_NAME" required maxlength="255" /></td>
+            </tr>
+            <tr>
+               <td>Telephone Number</td>
+               <td>
+                  <input type="text" name="ACTIVITY_TEL_NUM" value=""
+                         pattern="^0\d{9}$" title="Please use the format:123 123 1234" />
+               </td>
+            </tr>
+            <tr>
+               <td>Mobile Number</td>
+               <td><input type="text" name="ACTIVITY_MOBILE_NUM" value=""
+                         pattern="^0\d{9}$" title="Please use the format:123 123 1234" />
+               </td>
+            </tr>
+            <tr>
+               <td>Email</td>
+               <td><input type="email" name="ACTIVITY_EMAIL" maxlength="255" /></td>
+            </tr>
+            <tr>
+               <td>Website</td>
+               <td><input type="text" name="ACTIVITY_WEBSITE" value=""
+                         pattern="^.+\..+$" title="Please enter a valid website" />
+               </td>
+            </tr>
+            <tr>
+               <td>Address</td>
+               <td><input type="text" name="ACTIVITY_ADDRESS" value="" /></td>
+            </tr>
+            <tr>
+               <td>Contact Person</td>
+               <td><input type="text" name="ACTIVITY_CONTACT_PERSON" value="" /></td>
+            </tr>
+            <tr>
+               <td>Description</td>
+               <td><textarea name="ACTIVITY_DESCRIPTION" required maxlength="5000"></textarea></td>
+            </tr>
+            <tr>
+               <td>Category Name</td>
+               <td>
+                  <select id="dropdownList" name="ACTIVITY_CATEGORY_NAME" required>
+                     <option value="">Select an option</option>
+                     @foreach (var item in ViewBag.Categories)
+                     {
+                        <option value="@item">@item</option>
+                     }
+                  </select>
+               </td>
+            </tr>
+            <tr>
+               <td>Add Images</td>
+               <td>
+                  <input type="file" id="imageFiles" name="imageFiles" accept="image/*" multiple onchange="previewImages(this)" />
+                  <div id="imagePreview" class="thumbnail"></div>
+               </td>
+            </tr>
+         </table>
+         <header>
+            <h5> </h5>
+         </header>
+         <div id="loadingSpinner"></div>
+         <div id="errorMessages" class="error-messages"></div>
+         <button type="submit" id="btnAdd">
+            <i class="fa fa-save"></i> Add
+         </button>
+      </form>
+   </main>
+</body>
+</html>
+
+<script>
+   $(document).ready(function () {
+      var errorMessage = "@TempData["ErrorMessage"]";
+      if (errorMessage) {
+         console.log("Error message found:", errorMessage);
+         // Display a popup with the error message
+         alert(errorMessage);
+      } else {
+         console.log("No error message found.");
+      }
+   });
+
+   function addActivity() {
+      // Disable the button to prevent multiple submissions
+      $('#btnAdd').prop('disabled', true);
+
+      var formData = new FormData();
+      var input = document.getElementById("imageFiles");
+      var files = input.files;
+
+      // Append ActivityModel properties to the FormData dynamically
+      var formInputs = document.getElementsByTagName("input");
+      for (var i = 0; i < formInputs.length; i++) {
+         var inputName = formInputs[i].name;
+         var inputValue = formInputs[i].value;
+         formData.append("newActivity." + inputName, inputValue);
+      }
+
+      var formInputs = document.getElementsByTagName("textarea");
+      for (var i = 0; i < formInputs.length; i++) {
+         var inputName = formInputs[i].name;
+         var inputValue = formInputs[i].value;
+         formData.append("newActivity." + inputName, inputValue);
+      }
+
+      var formInputs = document.getElementsByTagName("select");
+      for (var i = 0; i < formInputs.length; i++) {
+         var inputName = formInputs[i].name;
+         var inputValue = formInputs[i].value;
+         formData.append("newActivity." + inputName, inputValue);
+      }
+
+      // Append image files
+      for (var i = 0; i < files.length; i++) {
+         formData.append("imageFiles", files[i]);
+      }
+
+      $('#loadingSpinner').addClass('loading-spinner');
+
+      $.ajax({
+         type: "POST",
+         url: '@Url.Action("AddActivity", "Activity")',
+         data: formData,
+         contentType: false,
+         processData: false,
+         success: function (result) {
+            if (result.success) {
+               alert("Entry added successfully!");
+               window.location.href = '/Activity/ViewActivities';
+            } else {
+               alert(result.message);
+            }
+         },
+         error: function (xhr, status, error) {
+            // Handle errors here
+         },
+         complete: function () {
+            // Hide loading spinner
+            $('#loadingSpinner').removeClass('loading-spinner');
+            // Re-enable the button after completion
+            $('#btnAdd').prop('disabled', false);
+         }
+      });
+   }
+
+   function previewImages(input) {
+      const imagePreview = document.getElementById("imagePreview");
+      imagePreview.innerHTML = "";
+
+      for (const file of input.files) {
+         if (file.type.startsWith("image/")) {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.classList.add("thumbnail");
+            imagePreview.appendChild(img);
+         }
+      }
+   }
+
+</script>
+
+<style>
+   .loading-spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+   }
+
+   @@-webkit-keyframes spin {
+      0% {
+         transform: rotate(0deg);
+      }
+
+      100% {
+         transform: rotate(360deg);
+      }
+   }
+</style>

@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>View Businesses</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <!-- Add icon library -->
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header>
+      <h1>View Businesses</h1>
+      <button class="btn-add-new" onclick="redirectToAdd()" style="font-size: 15px;">
+         <i class="fa fa-plus"></i>
+         Add New Business
+      </button>
+   </header>
+   <hr>
+   <main>
+      <table>
+         <thead>
+            <tr>
+               <th width="60%">Business Name</th>
+               <th>Details</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach (var business in ViewBag.Business)
+            {
+               <tr>
+                  <td>@business.BUSINESS_NAME</td>
+                  <td>
+                     <button onclick="redirectToDetails(@business.BUSINESS_ID)">Select</button>
+                  </td>
+               </tr>
+            }
+         </tbody>
+      </table>
+   </main>
+</body>
+</html>
+
+<script>
+   function redirectToDetails(BUSINESS_ID) {
+      window.location.href = '/Business/EditBusiness?id=' + BUSINESS_ID;
+   }
+
+   function redirectToAdd() {
+      window.location.href = '/Business/AddNewBusiness';
+   }
+</script>

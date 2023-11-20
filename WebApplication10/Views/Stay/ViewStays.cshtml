@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>View Stays</title>
+   <link rel="stylesheet" href="~/css/DefaultStyle.css">
+   <!-- Add icon library -->
+   <link rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+   <header>
+      <h1>View Stays</h1>
+      <button class="btn-add-new" onclick="redirectToAdd()" style="font-size: 15px;">
+         <i class="fa fa-plus"></i>
+         Add New Stay
+      </button>
+   </header>
+   <hr>
+   <main>
+      <table>
+         <thead>
+            <tr>
+               <th width="60%">Stay Name</th>
+               <th>Details</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach (var stay in ViewBag.Stay)
+            {
+               <tr>
+                  <td>@stay.STAY_NAME</td>
+                  <td>
+                     <button onclick="redirectToDetails(@stay.STAY_ID)">Select</button>
+                  </td>
+               </tr>
+            }
+         </tbody>
+      </table>
+   </main>
+</body>
+</html>
+
+<script>
+   function redirectToDetails(STAY_ID) {
+      window.location.href = '/Stay/EditStay?id=' + STAY_ID;
+   }
+
+   function redirectToAdd() {
+      window.location.href = '/Stay/AddNewStay';
+   }
+</script>
