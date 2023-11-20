@@ -26,6 +26,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //open edit eats view, allows for the editing of a selected view
+      [ValidateAntiForgeryToken]
       [Authorize]
       public IActionResult EditEats(int id)
       {
@@ -51,6 +52,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //open view eats view, allows for the viewing of all eats
+      [ValidateAntiForgeryToken]
       [Authorize]
       public async Task<IActionResult> ViewEats()
       {
@@ -63,6 +65,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //open add new eat view
+      [ValidateAntiForgeryToken]
       [Authorize]
       public IActionResult AddNewEat()
       {
@@ -71,6 +74,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //open view eat images view
+      [ValidateAntiForgeryToken]
       [Authorize]
       public async Task<IActionResult> ViewEatImages(int id)
       {
@@ -97,6 +101,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //post back to delte an image
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteImage(int eatId, string imageUrl)
@@ -128,6 +133,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //save eat post back, handles the updating of the model
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveEat(EatModel updatedEat)
@@ -159,6 +165,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //save eat post back, handles the updating of the model
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteEat(int EAT_ID)
@@ -200,6 +207,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //method to add a new entry, and the images to storage
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddEat(EatModel newEat, List<IFormFile> imageFiles)
@@ -249,21 +257,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //method to add a new entry, and the images ot storage
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles, int eatId)
       {
-         /*         List<string> imageURLs2 = new List<string>(); //await ProcessAndSaveImages(imageFiles);
-                  imageURLs2.Add("https://stilbaaitourism.co.za/wp-content/uploads/classified-listing/2023/10/look4-616x462.jpg");
-                  imageURLs2.Add("https://stilbaaitourism.co.za/wp-content/uploads/classified-listing/2023/10/look2-616x462.jpg");
-                  imageURLs2.Add("https://stilbaaitourism.co.za/wp-content/uploads/classified-listing/2023/10/look3-616x462.jpg");
-                  imageURLs2.Add("https://stilbaaitourism.co.za/wp-content/uploads/classified-listing/2023/10/look5-616x462.jpg");
-                  imageURLs2.Add("https://stilbaaitourism.co.za/wp-content/uploads/classified-listing/2023/10/look1-616x462.jpg");
-
-                  await AddImagesToDatabase(imageURLs2, eatId);
-
-                  return Json(new { success = true });*/
-
          try
          {
             if (!ModelState.IsValid || eatId <= 0)
@@ -301,6 +299,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //send the images to the api handeler
+      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -320,7 +319,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
                      imageBytes = stream.ToArray();
                   }
 
-                  string imageUrl = await _ToolBox.aPIHandeler.AddImage(imageBytes, "test");
+                  string imageUrl = await _ToolBox.APIHandeler.AddImage(imageBytes, "test");
 
                   if (imageUrl != "error")
                   {
@@ -344,6 +343,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //add the new eat to the db
+      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<int> AddEatToDatabase(EatModel newEat)
       {
@@ -352,6 +352,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //add the image url/s to the db
+      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs, int newEatId)
       {

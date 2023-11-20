@@ -26,6 +26,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //open edit events view, allows for the editing of a selected view
+      [ValidateAntiForgeryToken]
       [Authorize]
       public IActionResult EditEvent(int id)
       {
@@ -51,6 +52,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //open view events view, allows for the viewing of all events
+      [ValidateAntiForgeryToken]
       [Authorize]
       public async Task<IActionResult> ViewEvents()
       {
@@ -71,6 +73,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //open view event images view
+      [ValidateAntiForgeryToken]
       [Authorize]
       public async Task<IActionResult> ViewEventImages(int id)
       {
@@ -97,6 +100,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //post back to delte an image
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteImage(int eventId, string imageUrl)
@@ -128,6 +132,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //save event post back, handles the updating of the model
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveEvent(EventModel updatedEvent)
@@ -159,6 +164,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //save event post back, handles the updating of the model
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteEvent(int EVENT_ID)
@@ -200,6 +206,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //method to add a new entry, and the images to storage
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddEvent(EventModel newEvent, List<IFormFile> imageFiles)
@@ -249,6 +256,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //method to add a new entry, and the images ot storage
+      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles, int eventId)
@@ -290,6 +298,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //send the images to the api handeler
+      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -309,7 +318,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
                      imageBytes = stream.ToArray();
                   }
 
-                  string imageUrl = await _ToolBox.aPIHandeler.AddImage(imageBytes, "test");
+                  string imageUrl = await _ToolBox.APIHandeler.AddImage(imageBytes, "test");
 
                   if (imageUrl != "error")
                   {
@@ -333,6 +342,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //add the new event to the db
+      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<int> AddEventToDatabase(EventModel newEvent)
       {
@@ -341,6 +351,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //add the image url/s to the db
+      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs, int newEventId)
       {

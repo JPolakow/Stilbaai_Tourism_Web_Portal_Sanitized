@@ -12,7 +12,12 @@ namespace Stilbaai_Tourism_Web_Portal.Classes
       public static ToolBoxSingleton Instance => instance;
 
       //api handeler instance
-      public RestAPIHandeler aPIHandeler = new RestAPIHandeler();
+      private RestAPIHandeler aPIHandeler = new RestAPIHandeler();
+      public RestAPIHandeler APIHandeler
+      {
+         get { return aPIHandeler; }
+         set { aPIHandeler = value; }
+      }
 
       //---------------------------------------------------------------------------------------
       //eats

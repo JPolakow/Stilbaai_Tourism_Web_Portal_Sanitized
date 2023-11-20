@@ -19,6 +19,7 @@ public class AccountController : Controller
       await HttpContext.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
    }
 
+   [ValidateAntiForgeryToken]
    [Authorize]
    public async Task Logout()
    {
@@ -32,6 +33,7 @@ public class AccountController : Controller
       await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
    }
 
+   [ValidateAntiForgeryToken]
    [Authorize]
    public IActionResult Profile()
    {

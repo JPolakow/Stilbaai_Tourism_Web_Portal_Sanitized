@@ -328,7 +328,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
                      imageBytes = stream.ToArray();
                   }
 
-                  string imageUrl = await _ToolBox.aPIHandeler.AddImage(imageBytes, "test");
+                  string imageUrl = await _ToolBox.APIHandeler.AddImage(imageBytes, "test");
 
                   if (imageUrl != "error")
                   {
