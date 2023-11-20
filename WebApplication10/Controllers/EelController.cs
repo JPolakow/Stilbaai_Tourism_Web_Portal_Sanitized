@@ -23,7 +23,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       //==========VIEWS==========
       //---------------------------------------------------------------------------------------
       //open edit eels view, allows for the editing of a selected view
-      [ValidateAntiForgeryToken]
       [Authorize]
       public async Task<IActionResult> EditEel()
       {
@@ -51,7 +50,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //open view eel images view
-      [ValidateAntiForgeryToken]
       [Authorize]
       public async Task<IActionResult> ViewEelImages()
       {
@@ -76,7 +74,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //post back to delte an image
-      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteImage(string imageUrl)
@@ -109,7 +106,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //save eel post back, handles the updating of the model
-      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveEel(EelModel updatedEel)
@@ -141,7 +137,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //method to add a new entry, and the images ot storage
-      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles)
@@ -184,7 +179,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //send the images to the api handeler
-      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -228,7 +222,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //add the image url/s to the db
-      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs)
       {

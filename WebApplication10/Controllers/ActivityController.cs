@@ -91,7 +91,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       {
          var selectedActivity = _ToolBox.ActivityList.FirstOrDefault(r => r.ACTIVITY_ID == id);
 
-         List<string> urls = new List<string>();
+         List<string> urls;
          urls = await this.db.GetActivityImages(selectedActivity.ACTIVITY_ID);
 
          if (urls != null)

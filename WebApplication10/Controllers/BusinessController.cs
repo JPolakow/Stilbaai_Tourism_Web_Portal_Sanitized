@@ -276,7 +276,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //method to add a new entry, and the images ot storage
-      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles, int businessId)
@@ -318,7 +317,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //send the images to the api handeler
-      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -362,7 +360,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //add the new business to the db
-      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<int> AddBusinessToDatabase(BusinessModel newBusiness)
       {
@@ -371,7 +368,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //add the image url/s to the db
-      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs, int newBusinessId)
       {

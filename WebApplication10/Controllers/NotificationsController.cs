@@ -20,8 +20,7 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view
-      [ValidateAntiForgeryToken]
+      //open view 
       [Authorize]
       public async Task<IActionResult> Notifications()
       {

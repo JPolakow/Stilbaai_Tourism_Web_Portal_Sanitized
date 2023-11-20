@@ -73,7 +73,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //save contact post back, handles the updating of the model
-      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveContact(ContactModel updatedContact)
@@ -105,7 +104,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //save contact post back, handles the updating of the model
-      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteContact(int CONTACT_ID)
@@ -138,7 +136,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //method to add a new entry
-      [ValidateAntiForgeryToken]
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddContact(ContactModel newContact)
@@ -170,7 +167,6 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //---------------------------------------------------------------------------------------
       //add the new contact to the db
-      [ValidateAntiForgeryToken]
       [Authorize]
       private async Task<int> AddContactToDatabase(ContactModel newContact)
       {
