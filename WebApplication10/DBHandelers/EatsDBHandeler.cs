@@ -18,7 +18,7 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
          {
             List<EatModel> newEntries = new List<EatModel>();
 
-            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (1connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
                await connection.OpenAsync();
 
@@ -69,6 +69,7 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
          {
             using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
+               await connection.OpenAsync();
 
                List<string> urls = new List<string>();
 

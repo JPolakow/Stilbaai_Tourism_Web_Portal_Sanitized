@@ -20,7 +20,7 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
          {
             List<EventModel> newEntries = new List<EventModel>();
 
-            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
                await connection.OpenAsync();
 
@@ -73,6 +73,7 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
          {
             using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
+               await connection.OpenAsync();
 
                List<string> urls = new List<string>();
 

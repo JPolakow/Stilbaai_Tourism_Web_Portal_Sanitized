@@ -19,7 +19,7 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
          {
             List<BusinessModel> newEntries = new List<BusinessModel>();
 
-            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
                await connection.OpenAsync();
 
@@ -71,6 +71,8 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
          {
             using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
+               await connection.OpenAsync();
+
                List<string> urls = new List<string>();
 
                string query = $"SELECT * FROM `stil_app_db`.`Activity_Image_Table` WHERE ACTIVITY_ID = @ID;";

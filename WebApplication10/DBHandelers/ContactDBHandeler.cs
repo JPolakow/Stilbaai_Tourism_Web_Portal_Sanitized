@@ -18,7 +18,7 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
          {
             List<ContactModel> newEntries = new List<ContactModel>();
 
-            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
                await connection.OpenAsync();
 
