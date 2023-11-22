@@ -14,7 +14,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       private readonly StayDBHandeler db = new StayDBHandeler();
 
       //---------------------------------------------------------------------------------------
-      //default constructor
+      /// <summary>
+      /// default constructor
+      /// </summary>
+      /// <param name="logger"></param>
       public StayController(ILogger<StayController> logger)
       {
          _logger = logger;
@@ -25,7 +28,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       #region Views
 
       //---------------------------------------------------------------------------------------
-      //open edit stays view, allows for the editing of a selected view
+      /// <summary>
+      /// open edit stays view, allows for the editing of a selected view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public IActionResult EditStay(int id)
       {
@@ -65,7 +72,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view stays view, allows for the viewing of all stays
+      /// <summary>
+      /// open view stays view, allows for the viewing of all stays
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewStays()
       {
@@ -77,7 +87,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open add new stay view
+      /// <summary>
+      /// open add new stay view
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public IActionResult AddNewStay()
       {
@@ -93,7 +106,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view stay images view
+      /// <summary>
+      /// open view stay images view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewStayImages(int id)
       {
@@ -119,7 +136,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       //==========POSTBACKS==========
 
       //---------------------------------------------------------------------------------------
-      //post back to delte an image
+      /// <summary>
+      /// post back to delte an image
+      /// </summary>
+      /// <param name="stayId"></param>
+      /// <param name="imageUrl"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteImage(int stayId, string imageUrl)
@@ -150,7 +172,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save stay post back, handles the updating of the model
+      /// <summary>
+      /// save stay post back, handles the updating of the model
+      /// </summary>
+      /// <param name="updatedStay"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveStay(StayModel updatedStay)
@@ -183,7 +209,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save stay post back, handles the updating of the model
+      /// <summary>
+      /// postback to delete entry
+      /// </summary>
+      /// <param name="STAY_ID"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteStay(int STAY_ID)
@@ -224,7 +254,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images to storage
+      /// <summary>
+      /// method to add a new entry, and the images to storage
+      /// </summary>
+      /// <param name="newStay"></param>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddStay(StayModel newStay, List<IFormFile> imageFiles)
@@ -275,7 +310,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images ot storage
+      /// <summary>
+      /// method to add a new images ot storage
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <param name="stayId"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles, int stayId)
@@ -316,7 +356,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //send the images to the api handeler
+      /// <summary>
+      /// send the images to the api handeler
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -359,7 +403,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the new stay to the db
+      /// <summary>
+      /// add the new stay to the db
+      /// </summary>
+      /// <param name="newStay"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddStayToDatabase(StayModel newStay)
       {
@@ -367,7 +415,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the image url/s to the db
+      /// <summary>
+      /// add the image url/s to the db
+      /// </summary>
+      /// <param name="imageURLs"></param>
+      /// <param name="newStayId"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs, int newStayId)
       {
@@ -382,7 +435,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //error response
+      /// <summary>
+      /// error response
+      /// </summary>
+      /// <returns></returns>
       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
       public IActionResult Error()
       {

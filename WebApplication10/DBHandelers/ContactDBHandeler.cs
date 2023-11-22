@@ -11,7 +11,10 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entries from db
+      /// </summary>
+      /// <returns></returns>
       public async Task GetContact()
       {
          try
@@ -59,7 +62,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// update entry
+      /// </summary>
+      /// <param name="contact"></param>
+      /// <returns></returns>
       public async Task<bool> UpdateContact(ContactModel contact)
       {
          try
@@ -113,7 +120,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entry
+      /// </summary>
+      /// <param name="CONTACT_ID"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteContacr(int CONTACT_ID)
       {
          try
@@ -156,7 +167,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add new entry
+      /// </summary>
+      /// <param name="contact"></param>
+      /// <returns></returns>
       public async Task<int> AddContact(ContactModel contact)
       {
          try

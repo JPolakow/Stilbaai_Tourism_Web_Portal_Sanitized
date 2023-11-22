@@ -13,14 +13,20 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       private readonly ILogger<NotificationsController> _logger;
 
       //---------------------------------------------------------------------------------------
-      //default constructor
+      /// <summary>
+      /// default constructor
+      /// </summary>
+      /// <param name="logger"></param>
       public NotificationsController(ILogger<NotificationsController> logger)
       {
          _logger = logger;
       }
 
       //---------------------------------------------------------------------------------------
-      //open view 
+      /// <summary>
+      /// open view 
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> Notifications()
       {
@@ -28,7 +34,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //recieves the data from the view
+      /// <summary>
+      /// recieves the data from the view
+      /// </summary>
+      /// <param name="NOTIFICATION_CONTENT"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SendNotification(string NOTIFICATION_CONTENT)
@@ -52,7 +62,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //send notification to firebase
+      /// <summary>
+      /// send notification to firebase
+      /// </summary>
+      /// <param name="content"></param>
+      /// <returns></returns>
       [Authorize]
       private bool SendNotificationToFirebase(string content)
       {
@@ -100,3 +114,4 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
    }
 }
+//-------------------------------------====END OF FILE====-------------------------------------

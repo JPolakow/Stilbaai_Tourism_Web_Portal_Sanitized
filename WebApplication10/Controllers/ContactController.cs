@@ -14,7 +14,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       private readonly ContactDBHandeler db = new ContactDBHandeler();
 
       //---------------------------------------------------------------------------------------
-      //default constructor
+      /// <summary>
+      /// default constructor
+      /// </summary>
+      /// <param name="logger"></param>
       public ContactController(ILogger<ContactController> logger)
       {
          _logger = logger;
@@ -24,7 +27,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       #region Views
       //---------------------------------------------------------------------------------------
-      //open edit contact view, allows for the editing of a selected view
+      /// <summary>
+      /// open edit contact view, allows for the editing of a selected view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public IActionResult EditContact(int id)
       {
@@ -49,7 +56,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view contacts view, allows for the viewing of all contacts
+      /// <summary>
+      /// open view contacts view, allows for the viewing of all contacts
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewContacts()
       {
@@ -60,7 +70,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open add new contact view
+      /// <summary>
+      /// open add new contact view
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public IActionResult AddNewcontact()
       {
@@ -72,7 +85,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       //==========POSTBACKS==========
 
       //---------------------------------------------------------------------------------------
-      //save contact post back, handles the updating of the model
+      /// <summary>
+      /// save contact post back, handles the updating of the model
+      /// </summary>
+      /// <param name="updatedContact"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveContact(ContactModel updatedContact)
@@ -103,7 +120,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save contact post back, handles the updating of the model
+      /// <summary>
+      /// delete entry postback
+      /// </summary>
+      /// <param name="CONTACT_ID"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteContact(int CONTACT_ID)
@@ -135,7 +156,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry
+      /// <summary>
+      /// method to add a new entry
+      /// </summary>
+      /// <param name="newContact"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddContact(ContactModel newContact)
@@ -166,7 +191,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the new contact to the db
+      /// <summary>
+      /// add the new contact to the db
+      /// </summary>
+      /// <param name="newContact"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddContactToDatabase(ContactModel newContact)
       {
@@ -174,7 +203,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //error response
+      /// <summary>
+      /// error response
+      /// </summary>
+      /// <returns></returns>
       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
       public IActionResult Error()
       {

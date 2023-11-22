@@ -14,7 +14,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       private readonly EelDBHandeler db = new EelDBHandeler();
 
       //---------------------------------------------------------------------------------------
-      //default constructor
+      /// <summary>
+      /// default constructor
+      /// </summary>
+      /// <param name="logger"></param>
       public EelController(ILogger<EelController> logger)
       {
          _logger = logger;
@@ -22,7 +25,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
       //==========VIEWS==========
       //---------------------------------------------------------------------------------------
-      //open edit eels view, allows for the editing of a selected view
+      /// <summary>
+      /// open edit eels view, allows for the editing of a selected view
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> EditEel()
       {
@@ -49,7 +55,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view eel images view
+      /// <summary>
+      /// open view eel images view
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewEelImages()
       {
@@ -73,7 +82,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       //==========POSTBACKS==========
 
       //---------------------------------------------------------------------------------------
-      //post back to delte an image
+      /// <summary>
+      /// post back to delte an image
+      /// </summary>
+      /// <param name="imageUrl"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteImage(string imageUrl)
@@ -105,7 +118,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
 
       //---------------------------------------------------------------------------------------
-      //save eel post back, handles the updating of the model
+      /// <summary>
+      /// save eel post back, handles the updating of the model
+      /// </summary>
+      /// <param name="updatedEel"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveEel(EelModel updatedEel)
@@ -136,7 +153,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images ot storage
+      /// <summary>
+      /// method to add a new images ot storage
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles)
@@ -178,7 +199,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
 
 
       //---------------------------------------------------------------------------------------
-      //send the images to the api handeler
+      /// <summary>
+      /// send the images to the api handeler
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -221,7 +246,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the image url/s to the db
+      /// <summary>
+      /// add the image url/s to the db
+      /// </summary>
+      /// <param name="imageURLs"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs)
       {
@@ -236,7 +265,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //error response
+      /// <summary>
+      /// error response
+      /// </summary>
+      /// <returns></returns>
       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
       public IActionResult Error()
       {

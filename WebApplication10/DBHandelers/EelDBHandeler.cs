@@ -11,7 +11,10 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entries from db
+      /// </summary>
+      /// <returns></returns>
       public async Task GetEel()
       {
          try
@@ -58,7 +61,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all images for an entry
+      /// </summary>
+      /// <param name="EelId"></param>
+      /// <returns></returns>
       public async Task<List<string>> GetEelImages(int EelId)
       {
          try
@@ -99,7 +106,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// update entry
+      /// </summary>
+      /// <param name="eel"></param>
+      /// <returns></returns>
       public async Task<bool> UpdateEel(EelModel eel)
       {
          try
@@ -154,7 +165,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add images for an entry
+      /// </summary>
+      /// <param name="url"></param>
+      /// <param name="EelId"></param>
+      /// <returns></returns>
       public async Task<int> AddEelImage(string url, int EelId)
       {
          try
@@ -191,7 +207,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entries image
+      /// </summary>
+      /// <param name="EelId"></param>
+      /// <param name="url"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteImage(int EelId, string url)
       {
          try
@@ -235,3 +256,4 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
    }
 }
+//-------------------------------------====END OF FILE====-------------------------------------

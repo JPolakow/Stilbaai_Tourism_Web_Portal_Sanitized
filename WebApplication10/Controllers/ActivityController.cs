@@ -17,7 +17,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       #region Views
 
       //---------------------------------------------------------------------------------------
-      //open edit activitys view, allows for the editing of a selected view
+      /// <summary>
+      /// open edit activitys view, allows for the editing of a selected view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public IActionResult EditActivity(int id)
       {
@@ -57,7 +61,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view activitys view, allows for the viewing of all activitys
+      /// <summary>
+      /// open view activitys view, allows for the viewing of all activitys
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewActivities()
       {
@@ -69,7 +76,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open add new activity view
+      /// <summary>
+      /// open add new activity view
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public IActionResult AddNewActivity()
       {
@@ -85,7 +95,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view activity images view
+      /// <summary>
+      /// open view activity images view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewActivityImages(int id)
       {
@@ -111,7 +125,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       //==========POSTBACKS==========
 
       //---------------------------------------------------------------------------------------
-      //post back to delte an image
+      /// <summary>
+      /// post back to delte an image
+      /// </summary>
+      /// <param name="activityId"></param>
+      /// <param name="imageUrl"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteImage(int activityId, string imageUrl)
@@ -142,7 +161,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save activity post back, handles the updating of the model
+      /// <summary>
+      /// save activity post back, handles the updating of the model
+      /// </summary>
+      /// <param name="updatedActivity"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveActivity(ActivityModel updatedActivity)
@@ -175,7 +198,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save activity post back, handles the updating of the model
+      /// <summary>
+      /// delete entry postback
+      /// </summary>
+      /// <param name="ACTIVITY_ID"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteActivity(int ACTIVITY_ID)
@@ -216,7 +243,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images to storage
+      /// <summary>
+      /// method to add a new entry, and the images to storage
+      /// </summary>
+      /// <param name="newActivity"></param>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddActivity(ActivityModel newActivity, List<IFormFile> imageFiles)
@@ -267,7 +299,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images ot storage
+      /// <summary>
+      /// method to add a new images ot storage
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <param name="activityId"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles, int activityId)
@@ -308,7 +345,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //send the images to the api handeler
+      /// <summary>
+      /// send the images to the api handeler
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -351,7 +392,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the new activity to the db
+      /// <summary>
+      /// add the new activity to the db
+      /// </summary>
+      /// <param name="newActivity"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddActivityToDatabase(ActivityModel newActivity)
       {
@@ -359,7 +404,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the image url/s to the db
+      /// <summary>
+      /// add the image url/s to the db
+      /// </summary>
+      /// <param name="imageURLs"></param>
+      /// <param name="newActivityId"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs, int newActivityId)
       {
@@ -374,7 +424,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //error response
+      /// <summary>
+      /// error response
+      /// </summary>
+      /// <returns></returns>
       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
       public IActionResult Error()
       {

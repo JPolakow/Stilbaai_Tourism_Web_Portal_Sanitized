@@ -13,14 +13,17 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entries from db
+      /// </summary>
+      /// <returns></returns>
       public async Task GetEvent()
       {
          try
          {
             List<EventModel> newEntries = new List<EventModel>();
 
-            using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
                await connection.OpenAsync();
 
@@ -66,12 +69,16 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all images for an entry
+      /// </summary>
+      /// <param name="EventId"></param>
+      /// <returns></returns>
       public async Task<List<string>> GetEventImages(int EventId)
       {
          try
          {
-            using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
                await connection.OpenAsync();
 
@@ -107,7 +114,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// update entry 
+      /// </summary>
+      /// <param name="_event"></param>
+      /// <returns></returns>
       public async Task<bool> UpdateEvent(EventModel _event)
       {
          try
@@ -174,7 +185,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entry
+      /// </summary>
+      /// <param name="EventId"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteEvent(int EventId)
       {
          try
@@ -217,7 +232,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add new entry
+      /// </summary>
+      /// <param name="_event"></param>
+      /// <returns></returns>
       public async Task<int> AddEvent(EventModel _event)
       {
          try
@@ -276,7 +295,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add images for an entry
+      /// </summary>
+      /// <param name="url"></param>
+      /// <param name="EventId"></param>
+      /// <returns></returns>
       public async Task<int> AddEventImage(string url, int EventId)
       {
          try
@@ -293,7 +317,7 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
                   //command.Parameters.AddWithValue is a way to paramiterise the SQL, avoiding a SQL injection attack
                   command.Parameters.AddWithValue("@URL", string.IsNullOrEmpty(url) ? "" : url);
                   command.Parameters.AddWithValue("@ID", EventId.ToString());
-                  
+
                   int rowsAffected = command.ExecuteNonQuery();
 
                   return rowsAffected;
@@ -313,7 +337,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entries image
+      /// </summary>
+      /// <param name="EventId"></param>
+      /// <param name="url"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteImage(int EventId, string url)
       {
          try
@@ -357,3 +386,4 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
    }
 }
+//-------------------------------------====END OF FILE====-------------------------------------

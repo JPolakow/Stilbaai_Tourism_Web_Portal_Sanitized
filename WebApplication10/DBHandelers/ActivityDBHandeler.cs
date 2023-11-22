@@ -13,7 +13,10 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entries from db
+      /// </summary>
+      /// <returns></returns>
       public async Task GetActivity()
       {
          try
@@ -65,7 +68,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all images for an entry
+      /// </summary>
+      /// <param name="ActivityId"></param>
+      /// <returns></returns>
       public async Task<List<string>> GetActivityImages(int ActivityId)
       {
          try
@@ -106,7 +113,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// update entry
+      /// </summary>
+      /// <param name="activity"></param>
+      /// <returns></returns>
       public async Task<bool> UpdateActivity(ActivityModel activity)
       {
          try
@@ -168,7 +179,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entry
+      /// </summary>
+      /// <param name="ACTIVITY_ID"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteActivity(int ACTIVITY_ID)
       {
          try
@@ -211,7 +226,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add new entry
+      /// </summary>
+      /// <param name="activity"></param>
+      /// <returns></returns>
       public async Task<int> AddActivity(ActivityModel activity)
       {
          try
@@ -269,7 +288,12 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add images for an entry
+      /// </summary>
+      /// <param name="url"></param>
+      /// <param name="id"></param>
+      /// <returns></returns>
       public async Task<int> AddActivityImage(string url, int id)
       {
          try
@@ -306,7 +330,12 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entries image
+      /// </summary>
+      /// <param name="id"></param>
+      /// <param name="url"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteImage(int id, string url)
       {
          try
@@ -351,7 +380,10 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
 
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entry type categories
+      /// </summary>
+      /// <returns></returns>
       public async Task GetActivityCategory()
       {
          try

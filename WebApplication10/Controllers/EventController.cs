@@ -14,7 +14,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       private readonly EventDBHandeler db = new EventDBHandeler();
 
       //---------------------------------------------------------------------------------------
-      //default constructor
+      /// <summary>
+      /// default constructor
+      /// </summary>
+      /// <param name="logger"></param>
       public EventController(ILogger<EventController> logger)
       {
          _logger = logger;
@@ -25,7 +28,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       #region Views
 
       //---------------------------------------------------------------------------------------
-      //open edit events view, allows for the editing of a selected view
+      /// <summary>
+      /// open edit events view, allows for the editing of a selected view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public IActionResult EditEvent(int id)
       {
@@ -50,7 +57,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view events view, allows for the viewing of all events
+      /// <summary>
+      /// open view events view, allows for the viewing of all events
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewEvents()
       {
@@ -61,7 +71,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open add new event view
+      /// <summary>
+      /// open add new event view
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public IActionResult AddNewEvent()
       {
@@ -69,7 +82,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view event images view
+      /// <summary>
+      /// open view event images view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewEventImages(int id)
       {
@@ -95,7 +112,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       //==========POSTBACKS==========
 
       //---------------------------------------------------------------------------------------
-      //post back to delte an image
+      /// <summary>
+      /// post back to delte an image
+      /// </summary>
+      /// <param name="eventId"></param>
+      /// <param name="imageUrl"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteImage(int eventId, string imageUrl)
@@ -126,7 +148,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save event post back, handles the updating of the model
+      /// <summary>
+      /// save event post back, handles the updating of the model
+      /// </summary>
+      /// <param name="updatedEvent"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveEvent(EventModel updatedEvent)
@@ -157,7 +183,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save event post back, handles the updating of the model
+      /// <summary>
+      /// delete event postback
+      /// </summary>
+      /// <param name="EVENT_ID"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteEvent(int EVENT_ID)
@@ -198,7 +228,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images to storage
+      /// <summary>
+      /// method to add a new entry, and the images to storage
+      /// </summary>
+      /// <param name="newEvent"></param>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddEvent(EventModel newEvent, List<IFormFile> imageFiles)
@@ -247,7 +282,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images ot storage
+      /// <summary>
+      /// method to add new images to api and db
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <param name="eventId"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles, int eventId)
@@ -288,7 +328,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //send the images to the api handeler
+      /// <summary>
+      /// send the images to the api handeler
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -331,7 +375,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the new event to the db
+      /// <summary>
+      /// add the new event to the db
+      /// </summary>
+      /// <param name="newEvent"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddEventToDatabase(EventModel newEvent)
       {
@@ -339,7 +387,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the image url/s to the db
+      /// <summary>
+      /// add the image url/s to the db
+      /// </summary>
+      /// <param name="imageURLs"></param>
+      /// <param name="newEventId"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs, int newEventId)
       {
@@ -354,7 +407,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //error response
+      /// <summary>
+      /// error response
+      /// </summary>
+      /// <returns></returns>
       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
       public IActionResult Error()
       {

@@ -11,14 +11,17 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entries from db
+      /// </summary>
+      /// <returns></returns>
       public async Task GetEat()
       {
          try
          {
             List<EatModel> newEntries = new List<EatModel>();
 
-            using (1connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
                await connection.OpenAsync();
 
@@ -62,7 +65,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all images for an entry
+      /// </summary>
+      /// <param name="EatId"></param>
+      /// <returns></returns>
       public async Task<List<string>> GetEatImages(int EatId)
       {
          try
@@ -103,7 +110,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// update entry
+      /// </summary>
+      /// <param name="eat"></param>
+      /// <returns></returns>
       public async Task<bool> UpdateEat(EatModel eat)
       {
          try
@@ -163,7 +174,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entry
+      /// </summary>
+      /// <param name="EAT_ID"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteEat(int EAT_ID)
       {
          try
@@ -206,7 +221,11 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add new entry
+      /// </summary>
+      /// <param name="eat"></param>
+      /// <returns></returns>
       public async Task<int> AddEat(EatModel eat)
       {
          try
@@ -263,7 +282,12 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add images for an entry
+      /// </summary>
+      /// <param name="url"></param>
+      /// <param name="id"></param>
+      /// <returns></returns>
       public async Task<int> AddEatImage(string url, int id)
       {
          try
@@ -300,7 +324,12 @@ namespace Stilbaai_Tourism_Web_Portal.Workers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entries image
+      /// </summary>
+      /// <param name="id"></param>
+      /// <param name="url"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteImage(int id, string url)
       {
          try

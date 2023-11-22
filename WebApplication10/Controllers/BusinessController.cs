@@ -14,7 +14,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       private readonly BusinessDBHandeler db = new BusinessDBHandeler();
 
       //---------------------------------------------------------------------------------------
-      //default constructor
+      /// <summary>
+      /// default constructor
+      /// </summary>
+      /// <param name="logger"></param>
       public BusinessController(ILogger<BusinessController> logger)
       {
          _logger = logger;
@@ -25,7 +28,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       #region Views
 
       //---------------------------------------------------------------------------------------
-      //open edit businesss view, allows for the editing of a selected view
+      /// <summary>
+      /// open edit businesss view, allows for the editing of a selected view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public IActionResult EditBusiness(int id)
       {
@@ -65,7 +72,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view businesss view, allows for the viewing of all businesss
+      /// <summary>
+      /// open view businesss view, allows for the viewing of all businesss
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewBusiness()
       {
@@ -77,7 +87,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open add new business view
+      /// <summary>
+      /// open add new business view
+      /// </summary>
+      /// <returns></returns>
       [Authorize]
       public IActionResult AddNewBusiness()
       {
@@ -93,7 +106,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //open view business images view
+      /// <summary>
+      /// open view business images view
+      /// </summary>
+      /// <param name="id"></param>
+      /// <returns></returns>
       [Authorize]
       public async Task<IActionResult> ViewBusinessImages(int id)
       {
@@ -119,7 +136,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       //==========POSTBACKS==========
 
       //---------------------------------------------------------------------------------------
-      //post back to delte an image
+      /// <summary>
+      /// post back to delte an image
+      /// </summary>
+      /// <param name="businessId"></param>
+      /// <param name="imageUrl"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteImage(int businessId, string imageUrl)
@@ -150,7 +172,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save business post back, handles the updating of the model
+      /// <summary>
+      /// save business post back, handles the updating of the model
+      /// </summary>
+      /// <param name="updatedBusiness"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> SaveBusiness(BusinessModel updatedBusiness)
@@ -183,7 +209,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //save business post back, handles the updating of the model
+      /// <summary>
+      /// delete entry postback
+      /// </summary>
+      /// <param name="BUSINESS_ID"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> DeleteBusiness(int BUSINESS_ID)
@@ -224,7 +254,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images to storage
+      /// <summary>
+      /// method to add a new entry, and the images to storage
+      /// </summary>
+      /// <param name="newBusiness"></param>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddBusiness(BusinessModel newBusiness, List<IFormFile> imageFiles)
@@ -275,7 +310,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //method to add a new entry, and the images ot storage
+      /// <summary>
+      /// method to add a new images ot storage
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <param name="businessId"></param>
+      /// <returns></returns>
       [Authorize]
       [HttpPost]
       public async Task<IActionResult> AddImages(List<IFormFile> imageFiles, int businessId)
@@ -316,7 +356,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //send the images to the api handeler
+      /// <summary>
+      /// send the images to the api handeler
+      /// </summary>
+      /// <param name="imageFiles"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<List<string>> ProcessAndSaveImages(List<IFormFile> imageFiles)
       {
@@ -359,7 +403,11 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the new business to the db
+      /// <summary>
+      /// add the new business to the db
+      /// </summary>
+      /// <param name="newBusiness"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddBusinessToDatabase(BusinessModel newBusiness)
       {
@@ -367,7 +415,12 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //add the image url/s to the db
+      /// <summary>
+      /// add the image url/s to the db
+      /// </summary>
+      /// <param name="imageURLs"></param>
+      /// <param name="newBusinessId"></param>
+      /// <returns></returns>
       [Authorize]
       private async Task<int> AddImagesToDatabase(List<string> imageURLs, int newBusinessId)
       {
@@ -382,7 +435,10 @@ namespace Stilbaai_Tourism_Web_Portal.Controllers
       }
 
       //---------------------------------------------------------------------------------------
-      //error response
+      /// <summary>
+      /// error response
+      /// </summary>
+      /// <returns></returns>
       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
       public IActionResult Error()
       {

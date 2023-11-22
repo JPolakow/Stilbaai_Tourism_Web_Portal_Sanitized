@@ -12,14 +12,17 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entries from db
+      /// </summary>
+      /// <returns></returns>
       public async Task GetStay()
       {
          try
          {
             List<StayModel> newEntries = new List<StayModel>();
 
-            using (connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
+            using (var connection = new MySqlConnection(Properties.Resources.ResourceManager.GetString("ConnString")))
             {
                await connection.OpenAsync();
 
@@ -64,7 +67,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all images for an entry
+      /// </summary>
+      /// <param name="StayId"></param>
+      /// <returns></returns>
       public async Task<List<string>> GetStayImages(int StayId)
       {
          try
@@ -105,7 +112,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// update entry
+      /// </summary>
+      /// <param name="stay"></param>
+      /// <returns></returns>
       public async Task<bool> UpdateStay(StayModel stay)
       {
          try
@@ -167,7 +178,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entry
+      /// </summary>
+      /// <param name="StayId"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteStay(int StayId)
       {
          try
@@ -210,7 +225,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add new entry
+      /// </summary>
+      /// <param name="stay"></param>
+      /// <returns></returns>
       public async Task<int> AddStay(StayModel stay)
       {
          try
@@ -268,7 +287,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add images for an entry
+      /// </summary>
+      /// <param name="url"></param>
+      /// <param name="StayId"></param>
+      /// <returns></returns>
       public async Task<int> AddStayImage(string url, int StayId)
       {
          try
@@ -305,7 +329,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entries image
+      /// </summary>
+      /// <param name="StayId"></param>
+      /// <param name="url"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteImage(int StayId, string url)
       {
          try
@@ -350,7 +379,10 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
 
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entry type categories
+      /// </summary>
+      /// <returns></returns>
       public async Task GetStayCategory()
       {
          try
@@ -394,3 +426,4 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
    }
 }
+//-------------------------------------====END OF FILE====-------------------------------------

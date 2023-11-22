@@ -23,6 +23,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
+      /// <summary>
+      /// take image and send it to the api
+      /// </summary>
+      /// <param name="imageBytes"></param>
+      /// <param name="name"></param>
+      /// <returns></returns>
       public async Task<string> AddImage(byte[] imageBytes, string name)
       {
          try
@@ -71,6 +77,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
+      /// <summary>
+      /// get the url form the json responce
+      /// </summary>
+      /// <param name="jsonResponse"></param>
+      /// <returns></returns>
       private static string ExtractRenderedUrlFromJson(string jsonResponse)
       {
          JObject jsonObject = JObject.Parse(jsonResponse);

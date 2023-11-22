@@ -12,7 +12,10 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       private MySqlConnection connection;
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entries from db
+      /// </summary>
+      /// <returns></returns>
       public async Task GetBusiness()
       {
          try
@@ -64,7 +67,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all images for an entry
+      /// </summary>
+      /// <param name="BusinessId"></param>
+      /// <returns></returns>
       public async Task<List<string>> GetBusinessImages(int BusinessId)
       {
          try
@@ -105,7 +112,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// update entry
+      /// </summary>
+      /// <param name="business"></param>
+      /// <returns></returns>
       public async Task<bool> UpdateBusiness(BusinessModel business)
       {
          try
@@ -167,7 +178,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entry
+      /// </summary>
+      /// <param name="BusinessId"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteBusiness(int BusinessId)
       {
          try
@@ -210,7 +225,11 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add new entry
+      /// </summary>
+      /// <param name="business"></param>
+      /// <returns></returns>
       public async Task<int> AddBusiness(BusinessModel business)
       {
          try
@@ -268,7 +287,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// add images for an entry
+      /// </summary>
+      /// <param name="url"></param>
+      /// <param name="BusinessId"></param>
+      /// <returns></returns>
       public async Task<int> AddBusinessImage(string url, int BusinessId)
       {
          try
@@ -305,7 +329,12 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// delete an entries image
+      /// </summary>
+      /// <param name="BusinessId"></param>
+      /// <param name="url"></param>
+      /// <returns></returns>
       public async Task<bool> DeleteImage(int BusinessId, string url)
       {
          try
@@ -350,7 +379,10 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
 
 
       //---------------------------------------------------------------------------------------
-      //
+      /// <summary>
+      /// get all entry type categories
+      /// </summary>
+      /// <returns></returns>
       public async Task GetBusinessCategory()
       {
          try
@@ -394,3 +426,4 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
       }
    }
 }
+//-------------------------------------====END OF FILE====-------------------------------------
