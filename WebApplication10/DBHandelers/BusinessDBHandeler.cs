@@ -82,7 +82,7 @@ namespace Stilbaai_Tourism_Web_Portal.DBHandelers
 
                List<string> urls = new List<string>();
 
-               string query = $"SELECT * FROM `stil_app_db`.`Activity_Image_Table` WHERE ACTIVITY_ID = @ID;";
+               string query = $"SELECT * FROM `stil_app_db`.`Business_Image_Table` WHERE BUSINESS_ID = @ID;";
 
                using (var command = new MySqlCommand(query, connection))
                {
