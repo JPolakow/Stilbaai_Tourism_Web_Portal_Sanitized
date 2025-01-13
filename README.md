@@ -1,8 +1,10 @@
 # Stilbaai Tourism Web Portal (Sanitized)
 
-This repository contains a sanitized copy of a web portal created for Stilbaai Tourism. The unsanitized version has its own private repo.
+## Overview
 
-The source code for this version is identical to the main version; the only difference is that all API Keys, connection strings, and a JSON file containing Firebase authentication have been manually removed.
+This web application is for a secure admin portal I made in my undergrad for a NGO called Stilbaai Tourism. It allowed their staff to manage their database which was connected to a mobile application we also developed. It includes security features such as Auth0 and SQL injection attack prevention. It is connected to a large structured SQL database, an unstructured REST API for image storage and a firebase cloud storage for push notifications.
+
+This repository contains a sanitized copy of a web portal created for Stilbaai Tourism. The unsanitized version has its own private repo. The source code for this version is identical to the main version; the only difference is that all API Keys, connection strings, and a JSON file containing Firebase authentication have been manually removed.
 
 **Important Note:** This version cannot run as there is a missing file containing Firebase authentication, which has been intentionally removed. Additionally, it will not function as the connection string to interact with the database and the authentication service has been removed.
 
